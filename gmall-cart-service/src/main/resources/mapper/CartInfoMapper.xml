@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaoshuo.gmall.cart.mapper.CartInfoMapper">
+
+
+    <resultMap id="cartInfoMap" type="com.yaoshuo.gmall.bean.cart.CartInfo" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="cartPrice" column="current_price"/>
+    </resultMap>
+
+
+    <!--List<CartInfo> selectCartInfoWithCurrentPriceByUserId(String userId);-->
+    <select id="selectCartInfoWithCurrentPriceByUserId" resultMap="cartInfoMap">
+        SELECT
+            ci.id,
+            ci.user_id,
+            ci.sku_id,
+            ci.sku_num,
+            ci.sku_name,
+            ci.img_url,
+            si.price current_price
+        FROM
+            cart_info ci
+        LEFT JOIN
+            sku_info si
+        ON
+            ci.sku_id = si.id
+        WHERE
+            ci.user_id = #{userId}
+        order by
+            ci.id desc
+    </select>
+
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaoshuo.gmall.order.mapper.OrderInfoMapper">
+
+    <resultMap id="orderInfoMap" type="com.yaoshuo.gmall.bean.order.OrderInfo" autoMapping="true">
+        <id property="id" column="id" />
+
+        <collection property="orderDetailList" ofType="com.yaoshuo.gmall.bean.order.OrderDetail" autoMapping="true" >
+            <id property="id" column="order_detail_id"/>
+        </collection>
+    </resultMap>
+
+    <!--rderInfo getOrderInfoByOrderId(String orderId);-->
+    <select id="getOrderInfoByOrderId" resultMap="orderInfoMap">
+        SELECT
+            oi.id,
+            oi.consignee,
+            oi.consignee_tel,
+            oi.total_amount,
+            oi.order_status,
+            oi.user_id,
+            oi.payment_way,
+            oi.delivery_address,
+            oi.order_comment,
+            oi.out_trade_no,
+            oi.trade_body,
+            oi.create_time,
+            oi.expire_time,
+            oi.process_status,
+            oi.tracking_no,
+            oi.parent_order_id,
+            oi.img_url,
+            od.id order_detail_id,
+            od.sku_id,
+            od.sku_name,
+            od.sku_num,
+            od.order_price,
+            od.img_url
+        FROM
+            order_info oi
+        LEFT JOIN
+            order_detail od
+        ON
+            oi.id = od.order_id
+        WHERE
+            oi.id = #{orderId}
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaoshuo.gmall.manage.mapper.SkuSaleAttrValueMapper">
+
+    <resultMap id="skuSaleAttrValueMap" type="com.yaoshuo.gmall.bean.manage.SkuSaleAttrValue" autoMapping="true">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <!--List<SkuSaleAttrValue> selectSkuSaleAttrValueListBySpuId(String spuId);-->
+    <select id="selectSkuSaleAttrValueListBySpuId" resultMap="skuSaleAttrValueMap">
+        SELECT
+            ssav.sku_id,
+            ssav.sale_attr_id,
+            ssav.sale_attr_name,
+            ssav.sale_attr_value_id,
+            ssav.sale_attr_value_name
+        from
+            sku_sale_attr_value ssav
+        INNER JOIN
+            sku_info si
+        ON
+            ssav.sku_id = si.id
+        where
+            si.spu_id = #{spuId}
+        ORDER BY
+            si.id, ssav.sale_attr_value_id
+    </select>
+
+</mapper>

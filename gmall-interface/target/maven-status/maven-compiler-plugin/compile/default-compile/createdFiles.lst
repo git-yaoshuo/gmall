@@ -1,0 +1,8 @@
+com\yaoshuo\gmall\service\manage\BaseManageService.class
+com\yaoshuo\gmall\service\manage\ListService.class
+com\yaoshuo\gmall\service\order\OrderService.class
+com\yaoshuo\gmall\service\user\UserService.class
+com\yaoshuo\gmall\service\cart\CartService.class
+com\yaoshuo\gmall\service\manage\SkuManageService.class
+com\yaoshuo\gmall\service\manage\SpuManageService.class
+com\yaoshuo\gmall\service\payment\PaymentService.class

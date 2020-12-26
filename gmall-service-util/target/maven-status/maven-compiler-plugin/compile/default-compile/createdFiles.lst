@@ -1,0 +1,7 @@
+com\yaoshuo\gmall\config\ActivemqConfig.class
+com\yaoshuo\gmall\config\RedisConfig.class
+com\yaoshuo\gmall\constant\OrderConstant.class
+com\yaoshuo\gmall\constant\RedisConstant.class
+com\yaoshuo\gmall\constant\ESConstant.class
+com\yaoshuo\gmall\util\ActivemqUtil.class
+com\yaoshuo\gmall\util\JedisUtils.class

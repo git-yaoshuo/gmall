@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaoshuo.gmall.manage.mapper.BaseAttrInfoMapper">
+
+    <resultMap id="baseAttrInfoMap" type="com.yaoshuo.gmall.bean.manage.BaseAttrInfo" autoMapping="true">
+        <id property="id" column="id"/>
+
+        <collection property="attrValueList" ofType="com.yaoshuo.gmall.bean.manage.BaseAttrValue" autoMapping="true">
+            <id property="id" column="attr_value_id"/>
+        </collection>
+    </resultMap>
+
+    <!--List<BaseAttrInfo> selectAttrInfoListByBaseAttrValueIds(List<String> attrValueIdList);-->
+    <select id="selectAttrInfoListByBaseAttrValueIds" resultMap="baseAttrInfoMap">
+        select
+            bai.id,
+            bai.attr_name,
+            bai.catalog3_id,
+            bav.id attr_value_id,
+            bav.value_name
+        from
+            base_attr_info bai
+        INNER JOIN
+            base_attr_value bav
+        ON
+            bai.id = bav.attr_id
+        where
+            bav.id in
+        <foreach collection="list" item="valueId" open="(" separator="," close=")">
+            #{valueId}
+        </foreach>
+    </select>
+
+</mapper>
